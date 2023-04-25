@@ -15,7 +15,7 @@ _ Tạo một file `.env` và thêm các dòng sau:
    ```text
     PRIVATE_KEY=YOUR_PRIVATE_KEY
     INFURA_ID=YOUR_PROJECT_ID
-    text```
+    ```
     
   | Ghi chú: Bạn có thể kiểm tra file `.env.example`
  
