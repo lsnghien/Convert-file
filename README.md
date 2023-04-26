@@ -24,4 +24,6 @@ _ Tạo một file `.env` và thêm các dòng sau:
  # Bắt Đầu
  
  ## Hàm (functions) trong [Smart Contract](Incrementer.sol)
- _  `Constructor`: Hàm khởi tạo (Constructor Function) được gọi khi smart contract được triển khai
+ - `Constructor`: Hàm khởi tạo (Constructor Function) được gọi khi smart contract được triển khai, đồng thời sẽ khởi tạo `số` (`number`) thành `số chuỗi đầu` (`_initialNumber`);
+ 
+ - `increment`:   
