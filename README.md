@@ -103,7 +103,7 @@ const web3 = new Web3(
 ## 5. Cách lấy địa chỉ `account`
 Mỗi blockchain sẽ cung cấp cho người dùng một `address` duy nhất thông qua private key. Bạn có thể sử dụng API `we3.eth.accounts.privateKeyToAccount` để lấy địa chỉ `account` bằng cách chuyển private key thành một parameter.
 ```js
-// Create account from privatekey
+// Tạo account từ privatekey
 const account = web3.eth.accounts.privateKeyToAccount(privatekey);
 const account_from = {
   privateKey: privatekey,
@@ -111,8 +111,49 @@ const account_from = {
 };
 ```
 
+## 6. Cách nhận contract instance
+Sau khi đã lấy `bytecode` và `abi` ở bước thứ ba thì chúng ta có thể tạo contract instance bằng `abi`
 
+```js
+// Tạo contract instance
+const deployContract = new web3.eth.Contract(abi);
+```
 
+## 7. Tạo `deploy` transaction
+```js
+// Tạo Tx
+const deployTx = deployContract.deploy({
+    data: bytecode,
+    arguments: [5],
+});
+
+```
+## 8. Ký `deploy` transaction
+Sử dụng private key để ký `deploy` transaction. 
+```js
+const deployTransaction = await web3.eth.accounts.signTransaction(
+    {
+        data: deployTx.encodeABI(),
+        gas: 8000000,
+    },
+    account_from.privateKey
+);
+```
+
+## 9 Deploy smart contract
+Gửi `deploy` transaction đến bockchian bạn sẽ nhận lại một biên lai và lấy địa chỉ hợp đồng từ đây. 
+```js
+const deployReceipt = await web3.eth.sendSignedTransaction(
+    deployTransaction.rawTransaction
+);
+console.log(`Contract deployed at address: ${deployReceipt.contractAddress}`);
+```
+
+# Nguồn tài liệu
+- Web3js Official Documents: https://web3js.readthedocs.io/en/v1.2.11/getting-started.html
+- Code and Examples: https://docs.moonbeam.network/getting-started/local-node/deploy-contract/ 
+- How to use web3js: https://www.dappuniversity.com/articles/web3-js-intro
+- Nodejs APIs Documents: http://nodejs.cn/api/fs.html
 
 
 
